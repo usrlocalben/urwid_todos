@@ -1,12 +1,17 @@
-from urwid import WidgetPlaceholder, Text, Button
+from urwid import Text, Button
+from urwid_pydux import Component
 
 
-class Link(WidgetPlaceholder):
-    def __init__(self, active, text, on_click):
-        self.active = active
-        self.on_click = on_click
-        if active:
-            widget = Text(text)
+class Link(Component):
+    prop_types = {
+        'active': bool,
+        'text': basestring,
+        'on_click': callable,
+    }
+
+    def render_component(self, props):
+        if props['active']:
+            widget = Text(props['text'])
         else:
-            widget = Button(text, on_press=lambda _: on_click())
-        super(Link, self).__init__(widget)
+            widget = Button(props['text'], on_press=lambda _: props['on_click']())
+        return widget

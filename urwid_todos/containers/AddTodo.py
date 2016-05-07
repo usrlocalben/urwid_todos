@@ -1,11 +1,11 @@
 from urwid import Edit, Button, Columns, Text
-from urwid_pydux import Component
+from urwid_pydux import ConnectedComponent
 
 from urwid_todos.actions import add_todo
 
 
-class AddTodo(Component):
-    def render_component(self, store, props):
+class AddTodo(ConnectedComponent):
+    def render_component(self, props):
         self.edit = Edit(caption='Todo: ', edit_text='')
         self.button = Button('Add Todo')
         return Columns([

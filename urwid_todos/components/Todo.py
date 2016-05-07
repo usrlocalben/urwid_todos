@@ -1,14 +1,22 @@
-from urwid import WidgetPlaceholder, Text
+from urwid import Text
+from urwid_pydux import Component
 
 
-class Todo(WidgetPlaceholder):
-    def __init__(self, on_click, completed, text):
-        self.on_click = on_click
-        if completed:
-            self.widget = Text('[X] --' + text + '--')
+class Todo(Component):
+    prop_types = {
+        'on_click': callable,
+        'completed': bool,
+        'text': basestring,
+    }
+
+    def component_will_mount(self, props):
+        self.on_click = props['on_click']
+
+    def render_component(self, props):
+        if props['completed']:
+            return Text('[X] --' + props['text'] + '--')
         else:
-            self.widget = Text('[ ]   ' + text)
-        super(Todo, self).__init__(self.widget)
+            return Text('[ ]   ' + props['text'])
 
     def mouse_event(self, size, event, button, col, row, focus):
         if event == 'mouse release' and button == 0:

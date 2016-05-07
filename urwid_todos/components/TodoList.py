@@ -1,18 +1,26 @@
-from urwid import WidgetPlaceholder, ListBox, SimpleListWalker
+from urwid import ListBox, SimpleListWalker
+from urwid_pydux import Component
 
 from .Todo import Todo
 
 
-class TodoList(WidgetPlaceholder):
-    def __init__(self, todos, on_todo_click):
+class TodoList(Component):
+    prop_types = {
+        'todos': list,
+        'on_todo_click': callable,
+    }
+
+    def render_component(self, props):
 
         def make_todo(id, completed, text):
             def on_click():
-                on_todo_click(id)
-            return Todo(on_click, completed, text)
+                props['on_todo_click'](id)
+            return Todo(
+                on_click=on_click,
+                completed=completed,
+                text=text,
+            )
 
-        widget = ListBox(SimpleListWalker(
-            [make_todo(**todo) for todo in todos]
+        return ListBox(SimpleListWalker(
+            [make_todo(**todo) for todo in props['todos']]
         ))
-        super(TodoList, self).__init__(widget)
-

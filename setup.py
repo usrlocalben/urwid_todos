@@ -26,7 +26,7 @@ setup(
         'urwid_todos.containers',
         'urwid_todos.reducers',
     ],
-    install_requires=['urwid_pydux>=0.1.0'],
+    install_requires=['urwid_pydux>=0.2.0'],
     scripts=['bin/urwid_todos'],
     license='MIT',
 )
