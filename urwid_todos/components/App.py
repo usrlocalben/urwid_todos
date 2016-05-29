@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from urwid_todos.containers.AddTodo import AddTodo
 from urwid_todos.containers.VisibleTodoList import VisibleTodoList
 from urwid import Overlay, Frame, SolidFill, CENTER, RELATIVE, MIDDLE

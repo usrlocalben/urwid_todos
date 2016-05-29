@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from urwid import ListBox, SimpleListWalker
 from urwid_pydux import Component
 

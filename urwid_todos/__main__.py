@@ -1,9 +1,11 @@
+from __future__ import absolute_import
+
 import urwid
 from pydux.create_store import create_store
 from urwid_pydux import subscribe_urwid_redraw
 
-from components.App import App
-from reducers import todo_app
+from .components.App import App
+from .reducers import todo_app
 
 
 def main():
